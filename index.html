@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WTFrag - Киберспортивный турнир по Standoff 2</title>
+    <style>
+        :root {
+            --dark-brown: #5D4037;
+            --light-brown: #D7CCC8;
+            --white: #FFFFFF;
+            --accent: #8D6E63;
+            --red-accent: #D32F2F;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--white);
+            background-color: var(--dark-brown);
+        }
+        
+        header {
+            background-color: #3E2723;
+            padding: 20px 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .logo {
+            max-width: 250px;
+            height: auto;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(93, 64, 55, 0.8), rgba(93, 64, 55, 0.8)), url('standoff-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        h1 {
+            color: var(--white);
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .game-title {
+            color: var(--red-accent);
+            font-weight: bold;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+        
+        .date-place {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            color: var(--light-brown);
+        }
+        
+        .price-tag {
+            background-color: var(--red-accent);
+            display: inline-block;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.3em;
+            margin-bottom: 30px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--red-accent);
+            color: var(--white);
+            padding: 15px 40px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2em;
+            transition: transform 0.3s, background-color 0.3s;
+            text-transform: uppercase;
+        }
+        
+        .cta-button:hover {
+            background-color: #B71C1C;
+            transform: scale(1.05);
+        }
+        
+        section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--white);
+            font-size: 2.2em;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 3px;
+            background-color: var(--red-accent);
+            margin: 15px auto 0;
+        }
+        
+        .program-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding-left: 50px;
+        }
+        
+        .program-timeline:before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: var(--accent);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+        
+        .timeline-item:hover {
+            transform: translateX(10px);
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -40px;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--red-accent);
+            border: 3px solid var(--accent);
+        }
+        
+        .time {
+            font-weight: bold;
+            color: var(--red-accent);
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        
+        .teams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .team-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--red-accent);
+        }
+        
+        .team-logo {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+        
+        .organizers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .organizer {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 8px;
+        }
+        
+        .organizer-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--red-accent);
+            margin-bottom: 15px;
+        }
+        
+        .organizer-role {
+            color: var(--light-brown);
+            font-style: italic;
+            margin-top: 5px;
+        }
+        
+        .interactive-box {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 8px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        footer {
+            background-color: #3E2723;
+            color: var(--white);
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        
+        .social-links {
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: var(--white);
+            margin: 0 10px;
+            font-size: 1.5em;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--red-accent);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="Logo.png" alt="WTFrag Logo" class="logo">
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Киберспортивный турнир WTFrag</h1>
+            <div class="game-title">STANDOFF 2</div>
+            <p class="date-place">М.Орехово | Шипиловский пр. 37 к.1 | Актовый зал колледжа | 25 ноября 2023</p>
+            <div class="price-tag">1500 ₽ за участие</div>
+            <a href="#register" class="cta-button">Зарегистрироваться</a>
+        </div>
+    </section>
+    
+    <section id="program">
+        <div class="container">
+            <h2 class="section-title">Программа турнира</h2>
+            <div class="program-timeline">
+                <div class="timeline-item">
+                    <div class="time">12:00 - 13:00</div>
+                    <h3>Регистрация команд</h3>
+                    <p>Проверка документов и подтверждение участия 8 команд</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="time">13:00 - 13:30</div>
+                    <h3>Подготовка оборудования</h3>
+                    <p>Настройка игровых станций и тестирование</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="time">13:30 - 13:40</div>
+                    <h3>Вступительная речь</h3>
+                    <p>Приветствие участников и объяснение правил</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="time">13:40 - 17:10</div>
+                    <h3>Основной турнир</h3>
+                    <p>40 участников (8 команд по 5 человек) сражаются в Standoff 2</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="time">17:10 - 17:40</div>
+                    <h3>Дополнительный матч</h3>
+                    <p>Возможность для зрителей сыграть против победителей</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="time">17:40 - 18:10</div>
+                    <h3>Награждение</h3>
+                    <p>Вручение призов и закрытие турнира</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="teams" style="background-color: var(--accent);">
+        <div class="container">
+            <h2 class="section-title">Участники турнира</h2>
+            <div class="teams-grid">
+                <div class="team-card">
+                    <img src="Comands/cybershock.jpg" alt="CYBERSHOKE" class="team-logo">
+                    <h3>CYBERSHOKE</h3>
+                </div>
+                <div class="team-card">
+                    <img src="Comands/Mafiozy.jpg" alt="Mafiozy eSports" class="team-logo">
+                    <h3>Mafiozy eSports</h3>
+                </div>
+                <div class="team-card">
+                    <img src="Comands/Forze.jpg" alt="FORZE" class="team-logo">
+                    <h3>FORZE</h3>
+                </div>
+                <div class="team-card">
+                    <img src="Comands/Amkal.jpg" alt="AMKAL.PARI" class="team-logo">
+                    <h3>AMKAL.PARI</h3>
+                </div>
+                <div class="team-card">
+                    <img src="Comands/x-team.jpg" alt="X TEAM" class="team-logo">
+                    <h3>X TEAM</h3>
+                </div>
+                <div class="team-card">
+                    <img src="Comands/streeteight.jpg" alt="STREETEIGHT" class="team-logo">
+                    <h3>STREETEIGHT</h3>
+                </div>
+                <div class="team-card">
+                    <img src="Comands/Saints.jpg" alt="SAINTS" class="team-logo">
+                    <h3>SAINTS</h3>
+                </div>
+                <div class="team-card">
+                    <img src="Comands/Cyberhero.jpg" alt="CYBERHERO" class="team-logo">
+                    <h3>CYBERHERO</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="organizers">
+        <div class="container">
+            <h2 class="section-title">Организаторы</h2>
+            <div class="organizers">
+                <div class="organizer">
+                    <img src="People/Vika.jpg" alt="Иван Петров" class="organizer-img">
+                    <h3>Виктория Ахмадеева</h3>
+                    <p class="organizer-role">Главный организатор и ведущий</p>
+                </div>
+                <div class="organizer">
+                    <img src="People/Alla.jpg" alt="Алексей Смирнов" class="organizer-img">
+                    <h3>Алла Райкова</h3>
+                    <p class="organizer-role">Комментатор</p>
+                </div>
+                <div class="organizer">
+                    <img src="People/Nailjpg.jpg" alt="Екатерина Волкова" class="organizer-img">
+                    <h3>Наиль Мусин</h3>
+                    <p class="organizer-role">Судья</p>
+                </div>
+                <div class="organizer">
+                    <img src="People/Churka.jpg" alt="Дмитрий Козлов" class="organizer-img">
+                    <h3>Армен Богомолов</h3>
+                    <p class="organizer-role">Технический директор</p>
+                </div>
+                <div class="organizer">
+                    <img src="People/Em.jpg" alt="Дмитрий Козлов" class="organizer-img">
+                    <h3>Еммануил Шумский</h3>
+                    <p class="organizer-role">Оператор</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="register" style="background-color: var(--light-brown); color: var(--dark-brown);">
+        <div class="container">
+            <h2 class="section-title" style="color: var(--dark-brown);">Регистрация</h2>
+            <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+                <p style="font-size: 1.2em; margin-bottom: 30px;">Участие стоит 1500₽ с человека. Команда состоит из 5 игроков.</p>
+                <a href="#" class="cta-button" style="background-color: var(--dark-brown);">Зарегистрировать команду</a>
+                <p style="margin-top: 20px;">Все 8 команд зарегистрированы</p>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <img src="Logo.png" alt="WTFrag Logo" style="max-width: 200px; margin-bottom: 20px;">
+            <p>© 2023 WTFrag. Все права защищены.</p>
+            <p>Киберспортивный турнир по Standoff 2 в актовом зале колледжа</p>
+            
+            <div class="social-links">
+                <a href="#">VK</a>
+                <a href="#">TG</a>
+                <a href="#">YT</a>
+                <a href="#">Twitch</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
